@@ -16,6 +16,9 @@ def home_view(request:HttpRequest):
 def landing_view(request:HttpRequest):
     return render(request, "dc_main/landing_page.html")
 
+def privacy_view(request:HttpRequest):
+    return render(request, "dc_main/privacypolicy.html")
+
 
 def login_view(request: HttpRequest):
     # Checks to see if the form was submitted and to save the values inputted as variables.

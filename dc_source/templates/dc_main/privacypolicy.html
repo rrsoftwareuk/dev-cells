@@ -3,6 +3,14 @@
 {% load static %}
 {% block content %} 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (!localStorage.getItem("visited")) {
+        window.location.href = "{% url 'landing' %}";
+    }
+});
+</script>
+
 <br>
 <div class="content px-6">
   <h1>Privacy Policy</h1>
