@@ -37,113 +37,124 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
   </section>
- 
-<div class="container">
-  <div class="columns is-multiline">
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">View My Info Pack</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+
+{% if user.is_authenticated %}
+  <div class="container">
+    <div class="columns is-multiline">
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">View My Info Pack</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
-    </div>
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">Create New Draft</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Create New Draft</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
-    </div>
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">Schedule Review</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Schedule Review</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
-    </div>
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">Approve Drafts</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Approve Drafts</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
-    </div>
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">View Snapshots</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">View Snapshots</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
-    </div>
- 
-    <div class="column is-4">
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">Generate Report</p>
-        </header>
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Phasellus nec iaculis mauris.
+  
+      <div class="column is-4">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Generate Report</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Phasellus nec iaculis mauris.
+            </div>
           </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">View</a>
+          </footer>
         </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">View</a>
-        </footer>
       </div>
     </div>
   </div>
-</div>
+
+{% else %}
+    <div class="container">
+    <div class="box has-text-centered" style="max-width: 400px; margin: auto;">
+      <a href="/login">
+        <b>Please Log In To View Page Contents</b>
+      </a>
+    </div>
+    </div>
+{% endif %}
 <br>
 <br>
 <div class="container" style="display: flex; justify-content: center; align-items: center; text-align: center;">
