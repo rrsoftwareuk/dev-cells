@@ -85,6 +85,16 @@ def user_details_view(request:HttpRequest):
 def user_preferences_view(request:HttpRequest):
     return render(request, "dc_main/user-profile/user_preferences.html")
 
+@login_required
+def account_deletion_view(request:HttpRequest):
+    if request.method == "POST":
+        user = request.user
+        logout(request)
+        user.delete()
+        return redirect("home")
+    
+    return render(request, "dc_main/user-profile/account_deletion.html")
+
 def logout_view(request):
     logout(request)
     return redirect('home')

@@ -40,7 +40,7 @@
                     <div class="content">
                         <p><strong>Username:</strong> {{ request.user.username }}</p>
                         <p><strong>Email:</strong> {{ request.user.email }}</p>
-                        <p><strong>Password:</strong> {{ request.user.password }}</p>
+                        <!-- <p><strong>Password:</strong> {{ request.user.password }}</p> This just gives the hashed password, not really very helpful -->
                         <p><strong>Date Joined:</strong> {{ request.user.date_joined }}</p>
                         <p><strong>Last Login:</strong> {{ request.user.last_login }}</p>
                     </div>
@@ -89,9 +89,9 @@
                             </p>
                         </div>
 
-                        <div class="field mt-4">
-                            <button class="button is-danger is-link">Delete</button>
-                        </div>
+                        <a class="button is-danger" href="{% url 'deletion' %}">
+                            Delete
+                        </a>
                     </form>
                 </div>
 
@@ -99,5 +99,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
