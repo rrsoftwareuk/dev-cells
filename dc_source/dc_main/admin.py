@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Manager, Engineer, Quorom, Administrator
+from .models import Profile, Relationship, Action, Review
 
 # Register your models here.
 
-admin.site.register(Engineer)
-admin.site.register(Manager)
-admin.site.register(Quorom)
-admin.site.register(Administrator)
+admin.site.register(Profile)
+admin.site.register(Relationship)
+admin.site.register(Action)
+admin.site.register(Review)
