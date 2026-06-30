@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+
 # Create your models here.
 
 class Profile(models.Model):
@@ -20,7 +22,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=16)
     history = models.TextField(max_length=256)
     capabilities_and_attributes = models.TextField(max_length=256)
-    career_aspiractions = models.TextField(max_length=256)
+    career_aspirations = models.TextField(max_length=256)
     development_needs = models.TextField(max_length=256)
     mobility = models.TextField(max_length=128)
     succession_plan = models.TextField(max_length=256)
@@ -30,6 +32,7 @@ class Profile(models.Model):
     performance_rating = models.CharField(max_length=16)
     wants = models.TextField(max_length=256)
     needs = models.TextField(max_length=256)
+
 
 class Relationship(models.Model):
     RELATIONSHIP_TYPES = [
@@ -42,11 +45,13 @@ class Relationship(models.Model):
 
     relationship_type = models.CharField(max_length=20, choices=RELATIONSHIP_TYPES)
 
+
 class Action(models.Model):
     action = models.CharField(max_length=16)
     action_owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     next_move = models.TextField(max_length=128)
     action_status = models.CharField(max_length=32)
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
