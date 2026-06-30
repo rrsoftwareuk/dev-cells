@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="password" name="password" placeholder="Enter Password">
+                    <input class="input" type="password" name="password" placeholder="Enter Password" minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?&quot;:{}|&lt;&gt;]).*">
                     <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
                 </div>
                 <p class="is-size-7 mt-2">Password must contain:</p>

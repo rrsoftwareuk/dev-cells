@@ -13,9 +13,6 @@ from django.shortcuts import redirect
 def home_view(request:HttpRequest):
     return render(request, "dc_main/home.html")
 
-def landing_view(request:HttpRequest):
-    return render(request, "dc_main/landing_page.html")
-
 def privacy_view(request:HttpRequest):
     return render(request, "dc_main/privacypolicy.html")
 
