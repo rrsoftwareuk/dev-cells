@@ -209,5 +209,5 @@ __marimo__/
 .sqlite3
 *db.*
 *.pyc
-__pycache__/
 migrations/
+/dc_source/dc_main/migrations/
