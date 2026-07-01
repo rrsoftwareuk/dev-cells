@@ -48,6 +48,15 @@ def signup_view(request: HttpRequest):
         password = request.POST["password"]
         password2 = request.POST["password2"]
 
+        if not password:
+            return render(request, "dc_main/signup.html", {"error": "No password provided"})
+
+        if not email:
+            return render(request, "dc_main/signup.html", {"error": "No email provided"})
+
+        if not username:
+            return render(request, "dc_main/signup.html", {"error": "No username provided"})
+
         # Validating that password and confirm password match.
         if password != password2:
             return render(request, "dc_main/signup.html", {"error": "Passwords do not match"})
