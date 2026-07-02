@@ -16,18 +16,6 @@
 }
 </style>
 
- 
-<section class="section">
-    <div class="container">
-      <div class="columns is-centered">
-          <div class="box has-text-centered">
-            <p>
-              Welcome to the Development Cell (Dev Cell) system, a secure platform for managing structured employee development reviews. Individuals Create and maintain their information pack. Each review creates a snapshot to preserve a clear historical record, ensuring development progress and agreed actions are tracked consistently in one place.
-            </p>
-          </div>
-      </div>
-    </div>
-  </section>
 
 {% if user.is_authenticated %}
   <div class="container">
@@ -138,13 +126,27 @@
   </div>
 
 {% else %}
-    <div class="container">
-    <div class="box has-text-centered" style="max-width: 400px; margin: auto;">
-      <a href="/login">
-        <b>Please Log In To View Page Contents</b>
-      </a>
-    </div>
-    </div>
+    <main id="app">
+        <h1 class="title">
+            Welcome to the
+            <br>
+            <span class="colour-effect">Rolls-Royce </span>
+            <span class="font-effect">Dev Cells</span>
+            <span> Application</span>
+            <br/> Here you can create reviews, actions and more.
+        </h1>
+        <div class="options-cta">
+            <a class="primary-button" href="/login">
+                Login
+            </a>
+            <small>
+                Or
+            </small>
+            <a class="secondary-button" href="/signup">
+                Register
+            </a>
+        </div>
+    </main>
 {% endif %}
 <br>
 <br>

@@ -1,19 +1,11 @@
 {% load static %}
 {% block content %}
 
-<footer class="footer" style="padding: 3rem;">
-    <div style="display: flex; align-items: center; justify-content: center; position: relative;">
-        <div style="position: absolute; left: 1rem;">
-            <img src="https://raw.githubusercontent.com/rropen/.github/main/img/logo.png" style="height: 6rem; padding: 1rem;">
-        </div>
-        <div class="content has-text-centered">
-            <h4>Dev Cells</h4>  
-            <p>Created by Rolls-Royce.
-                <br>
-                View the Privacy Policy <a href="{% url 'privacy' %}">here</a>.
-            </p>
-        </div>
-    </div>
+<footer>
+  <div class="technologies">
+    <p>Made using</p>
+    <img src="{% static 'images/technologies.svg' %}" alt="List of technologies used to create this application" />
+  </div>
 </footer>
 
 {% endblock %}
