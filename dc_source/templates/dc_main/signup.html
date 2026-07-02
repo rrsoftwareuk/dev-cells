@@ -9,13 +9,11 @@
 {#</script>#}
 
 
-<div>
-    <div class="main column is-3 my-5 container box px-4">
-        <h2 class="title has-text-centered dText mt-4">Sign Up</h2>
-        
+<div class="entry-form-container">
+    <div class="entry-form">
+        <h3 class="entry-form-label">Sign Up</h3>
         <form method="POST">
             {% csrf_token %}
-
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control has-icons-left has-icons-right">
@@ -25,7 +23,6 @@
                     <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                 </div>
             </div>
-
             <div class="field">
                 <label class="label">First Name</label>
                 <div class="control has-icons-left has-icons-right">
@@ -35,7 +32,6 @@
                     <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                 </div>
             </div>
-
             <div class="field">
                 <label class="label">Last Name</label>
                 <div class="control has-icons-left has-icons-right">
@@ -45,7 +41,6 @@
                     <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
                 </div>
             </div>
-            
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control has-icons-left has-icons-right">
@@ -55,7 +50,6 @@
                     <span class="icon is-small is-left"><i class="fa fa-envelope"></i></span>
                 </div>
             </div>
-
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control has-icons-left has-icons-right">
@@ -73,7 +67,6 @@
                     <li>At least 1 symbol.</li>
                 </ul>
             </div>
-
             <div class="field">
                 <label class="label">Confirm Password</label>
                 <div class="control has-icons-left has-icons-right">
@@ -88,8 +81,8 @@
                 <p class="has-text-danger pb-2">{{ error }}</p>
             {% endif %}
 
-            <div class="control">
-                <button type="submit" class="button is-link is-fullwidth mt-2">Sign Up</button>
+            <div class="entry-form-cta">
+                <button type="submit" class="primary-button">Sign Up</button>
             </div>
             
         </form>

@@ -9,9 +9,9 @@
 {#</script>#}
 
 
-<div>
-    <div class="main column is-3 my-6 container box px-4">
-        <h2 class="title has-text-centered dText mt-4">Login</h2>
+<div class="entry-form-container">
+    <div class="entry-form">
+        <h2 class="entry-form-label">Login</h2>
         
         <form method="POST">
             {% csrf_token %}
@@ -36,8 +36,8 @@
                 <p class="has-text-danger pb-2">{{ error }}</p>
             {% endif %}
 
-            <div class="control">
-                <button type="submit" class="button is-fullwidth is-link">Login</button>
+            <div class="entry-form-cta">
+                <button type="submit" class="primary-button">Login</button>
             </div>
 
         </form>
