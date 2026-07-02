@@ -14,7 +14,6 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-
     name = models.CharField(max_length=32)
     photo = models.ImageField(upload_to='photos/', blank=True, null=True)
     grade = models.CharField(max_length=16)
@@ -32,6 +31,12 @@ class Profile(models.Model):
     performance_rating = models.CharField(max_length=16)
     wants = models.TextField(blank=True)
     needs = models.TextField(blank=True)
+
+    @classmethod
+    def create_profile(cls, user, first_name, last_name):
+        profile = cls(user=user, name=f'{first_name} {last_name}')
+        profile.save()
+        return profile
 
 
 class Relationship(models.Model):
