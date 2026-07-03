@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+
+<div class="container">
+    <div class="columns">
+        <div class="column is-3">
+            <form id="filter-form" method="get">
+                <nav class="panel">
+                    <p class="panel-heading">Status</p>
+                    <label class="panel-block">
+                        <input type="radio" name="status" value="unassigned" onchange="document.getElementById('filter-form').submit()"
+                        {% if selected_status == "Unassigned" %} checked {% endif %}>
+                    Unassigned
+                    </label>
+                    <label class="panel-block">
+                        <input type="radio" name="status" value="in_progress" onchange="document.getElementById('filter-form').submit()"
+                        {% if selected_status == "in_progress" %} checked {% endif %}>
+                    In Progress
+                    </label>
+                    <label class="panel-block">
+                        <input type="radio" name="status" value="complete" onchange="document.getElementById('filter-form').submit()"
+                        {% if selected_status == "complete" %} checked {% endif %}>
+                    Complete
+                    </label>
+                    <label class="panel-block">
+                        <input type="radio" name="status" value="all" onchange="document.getElementById('filter-form').submit()"
+                        {% if selected_status == "all" %} checked {% endif %}>
+                    All
+                    </label>                  
+                </nav>
+                <nav class="panel">
+                    <p class="panel-heading">User</p>
+                    <div class="panel-block">
+                        <div class="select is-fullwidth">
+                            <select name="user" onchange="document.getElementById('filter-form').submit()">
+                                <option value="all" {% if selected_user == "all" %} selected {% endif %}>
+                                    All Users
+                                </option>
+                                {% for user in users %}
+                                <option value="{{ user.user.username }}" {% if selected_user == user.user.username %} selected {% endif %}>
+                                    {{ user.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+
+
+                        </div>
+
+                    </div>                  
+                </nav>
+            </form>
+        </div>
+
+        <div class="columns is-9">
+            <h1 class="title is-4"> Actions </h1>
+
+            {% if actions %}
+                {% for action in actions %}
+                <div class="box">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <strong>{{action.action}}</strong>
+                        </div>
+                        <div class="level-right">
+                            {% if action.status == "complete" %}
+                                <span class="tag is-success">{{ action.get_action_status_display }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+            
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="notification is-light">
+                    No actions meet the specified filters
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

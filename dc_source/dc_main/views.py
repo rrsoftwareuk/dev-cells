@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
+from .models import Action, Profile
+
 # Create your views here.
 def home_view(request:HttpRequest):
     return render(request, "dc_main/home.html")
@@ -69,6 +71,35 @@ def signup_view(request: HttpRequest):
 
     # Defult line that was used to close the function before.
     return render(request, "dc_main/signup.html")
+
+def actions_view(request:HttpRequest):
+
+    # Pulls the user and status values from the GET dicitonary
+
+    status = request.GET.get("status", "all")
+    username = request.GET.get("user", "all")
+
+    # Selects all the user foreign keys in all action objects
+
+    actions = Action.objects.select_related("user")
+
+
+    # Filters action objects based on status and user, else it selects all
+
+    if status != "all":
+        actions = actions.filter(action_status=status)
+
+    if username != "all":
+        actions = actions.filter(user__username=username)
+    
+    context = {
+        "actions" : actions,
+        "users" : Profile.objects.all(),
+        "selected_status" : status,
+        "selected_user" : username
+    }
+
+    return render(request, "dc_main/actions_view.html", context)
 
 @login_required
 def user_profile_view(request:HttpRequest):
