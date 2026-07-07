@@ -83,12 +83,12 @@
                 <div class="control">
                     <div class="select is-fullwidth">
                         <select name="dev_cell_rating">
-                            <option value="">Select Rating:</option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
+                            <option value="">Select Rating:</option> 
+                            {% if action_status %}
+                                {% for status in action_status%}
+                                    <option>{{ status.action_status }}</option>
+                                {% endfor %}
+                            {% endif %}
                         </select>
                     </div>
                 </div>
@@ -101,8 +101,7 @@
                 <div class="control">
                     <div class="select is-fullwidth">
                         <select name="performance_rating">
-                            <opti
-                            on value="">Select Rating:</option>
+                        </option value="">Select Rating:</option>
                             <option>5 - </option>
                             <option>4 - </option>
                             <option>3 - </option>

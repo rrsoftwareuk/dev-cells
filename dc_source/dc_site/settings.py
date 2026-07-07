@@ -118,3 +118,21 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "static_rooot"
+
+# Mobility Configured List
+
+MOBILITY_OPTIONS = [
+    ("")
+    ("")
+    ("")
+]
+
+
+# Succession Configured List
+
+SUCCESSION_OPTIONS = [
+    ("")
+    ("")
+    ("")
+]
+

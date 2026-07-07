@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
+from .models import ActionStatus, Mobility, Succession
+
 # Create your views here.
 def home_view(request:HttpRequest):
     return render(request, "dc_main/home.html")
@@ -98,3 +100,14 @@ def account_deletion_view(request:HttpRequest):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+def prepopulate_view(request):
+    action_status = ActionStatus.objects.all()
+    mobility = Mobility.objects.all()
+    succession_plan = Succession.objects.all()
+    context = {"action_status": action_status, "mobility": mobility, "sucession_plan": succession_plan}
+    return render(request, "dc_main/prepopulate.html", context)
+ 
+
+

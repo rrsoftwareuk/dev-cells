@@ -12,5 +12,6 @@ urlpatterns = [
     path('user-details', views.user_details_view, name="user-details"),
     path('user-preferences', views.user_preferences_view, name="user-preferences"),
     path('logout', views.logout_view, name="logout"),
-    path('deletion', views.account_deletion_view, name="deletion")
+    path('deletion', views.account_deletion_view, name="deletion"),
+    path('prepopulate', views.prepopulate_view, name="prepopulate")
 ]
