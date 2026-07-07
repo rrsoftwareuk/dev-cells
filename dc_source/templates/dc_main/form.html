@@ -62,18 +62,46 @@
             <div class="field">
                 <label class="label">Grade</label>
                 <div class="control">
-                    <input class="input" type="text" name="grade" placeholder="Enter Grade" id="grade">
+                    <div class="select is-fullwidth">
+                        <select name="grade">
+                                {% for rating in grade %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <script>document.getElementById("grade").defaultValue = "{{ grade }}";</script>
 
+<!-- Potential Grade -->
+
+            <div class="field">
+                <label class="label">Potential Grade</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="potential_grade">
+                                {% for rating in potential_grade %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("grade").defaultValue = "{{ potential_grade }}";</script>
 <!-- Position -->
 
             <div class="field">
                 <label class="label">Position</label>
                 <div class="control">
-                    <input class="input" type="text" name="position" placeholder="Enter Position" id="position">
+                    <div class="select is-fullwidth">
+                        <select name="position">
+                                {% for position in positions %}
+                                    <option>{{ position.position }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -84,10 +112,15 @@
             <div class="field">
                 <label class="label">Location</label>
                 <div class="control">
-                    <input class="input" type="text" name="location" placeholder="Enter Location" id="location">
+                    <div class="select is-fullwidth">
+                        <select name="location">
+                                {% for location in locations %}
+                                    <option>{{ location.location }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
-
             <script>document.getElementById("location").defaultValue = "{{ location }}";</script>
 
 <!-- Dev Cell rating -->
@@ -97,11 +130,9 @@
                 <div class="control">
                     <div class="select is-fullwidth">
                         <select name="dev_cell_rating">
-                            {% if action_status %}
-                                {% for status in action_status%}
-                                    <option>{{ status.action_status }}</option>
+                                {% for rating in dev_cell_rating_options %}
+                                    <option>{{ rating.grade }}</option>
                                 {% endfor %}
-                            {% endif %}
                         </select>
                     </div>
                 </div>
@@ -116,12 +147,9 @@
                 <div class="control">
                     <div class="select is-fullwidth">
                         <select name="performance_rating">
-                            <option id="performance_rating">Select Rating:</option>
-                            <option>5 - </option>
-                            <option>4 - </option>
-                            <option>3 - </option>
-                            <option>2 - </option>
-                            <option>1 - </option>
+                                {% for rating in performance_rating_options %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -151,4 +179,6 @@
 </div>
 
 <script src="{% static 'js/prepopulate.js' %}"></script>
+
+
 {% endblock %}

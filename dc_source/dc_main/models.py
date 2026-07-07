@@ -66,13 +66,24 @@ class Review(models.Model):
     review_information = models.TextField(blank=True)
     review_information = models.TextField(max_length=32)
 
-class ActionStatus(models.Model):
-    action_status = models.CharField(max_length=32)
 
-class Mobility(models.Model):
-    mobility = models.CharField(max_length=32)
+class dev_cell_rating(models.Model):
+    grade = models.CharField(max_length=32)
 
-class Succession(models.Model):
-    succession_plan = models.CharField(max_length=32)
+class performance_rating(models.Model):
+    grade = models.CharField(max_length=32)
+
+class grade(models.Model):
+    grade = models.CharField(max_length=32)
+
+class potential_grade(models.Model):
+    grade = models.CharField(max_length=32)
+
+class location(models.Model):
+    location = models.CharField(max_length=32)
+
+class position(models.Model):
+    position = models.CharField(max_length=32)
+
 
 

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from .models import Action, Profile, ActionStatus
+from .models import Action, Profile, performance_rating, dev_cell_rating, grade, potential_grade, position, location
 
 # Create your views here.
 def home_view(request:HttpRequest):
@@ -128,40 +128,63 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
-def form_view(request:HttpRequest):
+@login_required
+def form_view(request: HttpRequest):
 
-    
     profile = request.user.profile
 
-    username = profile.user
-    name = profile.name
-    grade = profile.grade
-    position = profile.position
-    location = profile.location
-    dev_cell_rating = profile.dev_cell_rating
-    performance_rating = profile.performance_rating
+    if request.method == "POST":
+        profile.name = request.POST.get("name")
+        profile.grade = request.POST.get("grade")
+        profile.position = request.POST.get("position")
+        profile.location = request.POST.get("location")
+        profile.dev_cell_rating = request.POST.get("dev_cell_rating")
+        profile.performance_rating = request.POST.get("performance_rating")
+        profile.grade = request.POST.get("grade")
+        profile.potential_grade = request.POST.get("potential_grade")
+
+        print(profile.grade)
+        print(profile.potential_grade)
+        print(profile.position)
+        print(profile.location)
+        print(profile.dev_cell_rating)
+        print(profile.performance_rating)
+
+        profile.save()
+
+        print("Saved!")
+        
+        return redirect("home")
 
     manager_relationship = Relationship.objects.filter(
-    to_user=request.user,
-    relationship_type="manager"
+        to_user=request.user,
+        relationship_type="manager"
     ).select_related("from_user__profile").first()
 
-    manager_profile = manager_relationship.from_user.profile if manager_relationship else None
+    manager_name = ""
+    if manager_relationship:
+        manager_name = manager_relationship.from_user.profile.name
 
-    manager_name = manager_profile.name
-
-    action_status = ActionStatus.objects.all()
+    performance_rating_options = performance_rating.objects.all()
+    dev_cell_rating_options = dev_cell_rating.objects.all()
+    potential_grade_options = potential_grade.objects.all()
+    grade_options = grade.objects.all()
+    location_options = location.objects.all()
+    position_options = position.objects.all()
 
     context = {
-        "username" : username,
-        "name" : name,
-        "manager" : manager_name,
-        "grade" : grade,
-        "position" : position,
-        "location" : location,
-        "dev_cell_rating" : dev_cell_rating,
-        "performance_rating" : performance_rating,
-        "action_status": action_status
+        "username": profile.user.username,
+        "name": profile.name,
+        "manager": manager_name,
+        "grade": profile.grade,
+        "dev_cell_rating": profile.dev_cell_rating,
+        "performance_rating": profile.performance_rating,
+        "dev_cell_rating_options" : dev_cell_rating_options,
+        "performance_rating_options" : performance_rating_options,
+        "potential_grade" : potential_grade_options,
+        "grade" : grade_options,
+        "locations" : location_options,
+        "positions" : position_options
     }
 
     return render(request, "dc_main/form.html", context)
