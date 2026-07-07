@@ -4,13 +4,13 @@ from django.http import HttpRequest
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from .models import Relationship
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from dc_main.models import Profile
-
+from .models import Action, Profile
 
 # Create your views here.
 def home_view(request:HttpRequest):
@@ -47,27 +47,9 @@ def signup_view(request: HttpRequest):
     # Checks to see if the form was submitted and to save the values inputted as variables.
     if request.method == "POST":
         username = request.POST["username"]
-        first_name = request.POST["first_name"]
-        last_name = request.POST["last_name"]
         email = request.POST["email"]
         password = request.POST["password"]
         password2 = request.POST["password2"]
-
-        if username and first_name and last_name and email and password and password2:
-            pass
-        else:
-            return render(request, "dc_main/signup.html", {"error": "Missing fields"})
-        # Check if a password has been provided
-        # if not password:
-        #     return render(request, "dc_main/signup.html", {"error": "No password provided"})
-        #
-        # # check if an email has been provided
-        # if not email:
-        #     return render(request, "dc_main/signup.html", {"error": "No email provided"})
-        #
-        # # Check a username has been provided
-        # if not username:
-        #     return render(request, "dc_main/signup.html", {"error": "No username provided"})
 
         # Validating that password and confirm password match.
         if password != password2:
@@ -81,9 +63,8 @@ def signup_view(request: HttpRequest):
         if User.objects.filter(email=email).exists():
             return render(request, "dc_main/signup.html", {"error": "Email already registered"})
 
-        # Creates the user and profile if form inputs are valid.
-        user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
-        profile = Profile.create_profile(user=user, first_name=first_name, last_name=last_name)
+        # Creates the user if form inputs are valid.
+        user = User.objects.create_user(username=username, email=email, password=password)
 
         # Automatically logins the user in when account is created and redirected to the home page.
         login(request, user)
@@ -91,6 +72,35 @@ def signup_view(request: HttpRequest):
 
     # Defult line that was used to close the function before.
     return render(request, "dc_main/signup.html")
+
+def actions_view(request:HttpRequest):
+
+    # Pulls the user and status values from the GET dicitonary
+
+    status = request.GET.get("status", "all")
+    username = request.GET.get("user", "all")
+
+    # Selects all the user foreign keys in all action objects
+
+    actions = Action.objects.select_related("user")
+
+
+    # Filters action objects based on status and user, else it selects all
+
+    if status != "all":
+        actions = actions.filter(action_status=status)
+
+    if username != "all":
+        actions = actions.filter(user__username=username)
+    
+    context = {
+        "actions" : actions,
+        "users" : Profile.objects.all(),
+        "selected_status" : status,
+        "selected_user" : username
+    }
+
+    return render(request, "dc_main/actions_view.html", context)
 
 @login_required
 def user_profile_view(request:HttpRequest):
@@ -117,3 +127,40 @@ def account_deletion_view(request:HttpRequest):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+def form_view(request:HttpRequest):
+
+    
+    profile = request.user.profile
+
+    username = profile.user
+    name = profile.name
+    grade = profile.grade
+    position = profile.position
+    location = profile.location
+    dev_cell_rating = profile.dev_cell_rating
+    performance_rating = profile.performance_rating
+
+    manager_relationship = Relationship.objects.filter(
+    to_user=request.user,
+    relationship_type="manager"
+    ).select_related("from_user__profile").first()
+
+    manager_profile = manager_relationship.from_user.profile if manager_relationship else None
+
+    manager_name = manager_profile.name
+
+
+
+    context = {
+        "username" : username,
+        "name" : name,
+        "manager" : manager_name,
+        "grade" : grade,
+        "position" : position,
+        "location" : location,
+        "dev_cell_rating" : dev_cell_rating,
+        "performance_rating" : performance_rating
+    }
+
+    return render(request, "dc_main/form.html", context)
