@@ -68,14 +68,11 @@ class Review(models.Model):
 
 class ActionStatus(models.Model):
     action_status = models.CharField(max_length=32)
-    choices=settings.ACTIONSTATUS_OPTIONS
 
 class Mobility(models.Model):
     mobility = models.CharField(max_length=32)
-    choices=settings.MOBILITY_OPTIONS
 
 class Succession(models.Model):
     succession_plan = models.CharField(max_length=32)
-    choices=settings.SUCCESSION_OPTIONS
 
 

@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from .models import Action, Profile
+from .models import Action, Profile, ActionStatus
 
 # Create your views here.
 def home_view(request:HttpRequest):
@@ -150,7 +150,7 @@ def form_view(request:HttpRequest):
 
     manager_name = manager_profile.name
 
-
+    action_status = ActionStatus.objects.all()
 
     context = {
         "username" : username,
@@ -160,7 +160,8 @@ def form_view(request:HttpRequest):
         "position" : position,
         "location" : location,
         "dev_cell_rating" : dev_cell_rating,
-        "performance_rating" : performance_rating
+        "performance_rating" : performance_rating,
+        "action_status": action_status
     }
 
     return render(request, "dc_main/form.html", context)
