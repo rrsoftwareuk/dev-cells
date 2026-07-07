@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
 
@@ -63,3 +64,18 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review_date = models.DateField()
     review_information = models.TextField(blank=True)
+    review_information = models.TextField(max_length=32)
+
+class ActionStatus(models.Model):
+    action_status = models.CharField(max_length=32)
+    choices=settings.ACTIONSTATUS_OPTIONS
+
+class Mobility(models.Model):
+    mobility = models.CharField(max_length=32)
+    choices=settings.MOBILITY_OPTIONS
+
+class Succession(models.Model):
+    succession_plan = models.CharField(max_length=32)
+    choices=settings.SUCCESSION_OPTIONS
+
+
