@@ -34,9 +34,12 @@ class Profile(models.Model):
 
     @classmethod
     def create_profile(cls, user, first_name, last_name):
-        profile = cls(user=user, name=f'{first_name} {last_name}')
+        profile = cls(user=user, name=f'{first_name} {last_name}', role='Individual')
         profile.save()
         return profile
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 class Relationship(models.Model):
@@ -58,8 +61,26 @@ class Action(models.Model):
     next_move = models.TextField(blank=True)
     action_status = models.CharField(max_length=32)
 
+    @classmethod
+    def create_action(cls, user,  action, action_owner, next_move):
+        new_action = cls(user=user, action=action, action_owner=action_owner, next_move=next_move)
+        new_action.save()
+        return new_action
+
+    def __str__(self):
+        return f'Action on {self.user.first_name} {self.user.last_name}'
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review_date = models.DateField()
     review_information = models.TextField(blank=True)
+
+    @classmethod
+    def create_review(cls, user, review_date, review_information):
+        new_review = cls(user=user, date=review_date, information=review_information)
+        new_review.save()
+        return new_review
+
+    def __str__(self):
+        return f'Review on {self.user.first_name} {self.user.last_name}'
