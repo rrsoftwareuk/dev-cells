@@ -108,8 +108,10 @@ def user_preferences_view(request:HttpRequest):
 def account_deletion_view(request:HttpRequest):
     if request.method == "POST":
         user = request.user
+        profile = Profile.objects.get(user=user)
         logout(request)
         user.delete()
+        profile.delete()
         return redirect("home")
     
     return render(request, "dc_main/user-profile/account_deletion.html")
