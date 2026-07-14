@@ -143,7 +143,8 @@ def logout_view(request):
 @login_required
 def form_view(request: HttpRequest):
 
-    profile = request.user.profile
+    user = request.user
+    profile = Profile.objects.get(user=user)
 
     if request.method == "POST":
         profile.name = request.POST.get("name")
