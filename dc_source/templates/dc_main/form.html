@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% block title %}Prepopulate{% endblock %}
+{% load static %}
+{% block content %}
+
+<!-- Form Container (headings and styles) -->
+
+<div>
+    <div class="main column is-6 my-6 container box px-5">
+        <h2 class="title has-text-centered dText mt-4">Form</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+<!-- Upload file of the list -->
+
+            <div class="field">
+                <label class="label">Upload Predefined List</label>
+                <div class="control">
+                    <input class="input" type="file" name="employee_file" accept=".csv,.xlsx,.xls">
+                </div>
+                <p class="help">Accepted formats: CSV, XLSX, XLS</p>
+            </div>
+            <hr>
+
+            
+
+<!-- Username  -->
+
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control">
+                    <input class="input" type="text" name="username" placeholder="Enter Username" id="username">
+                </div>
+            </div>
+
+            <script>document.getElementById("username").defaultValue = "{{ user.username }}";</script>
+
+<!-- Name -->
+
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" placeholder="Enter Full Name" id="name">
+                </div>
+            </div>
+
+            <script>document.getElementById("name").defaultValue = "{{ name }}";</script>
+
+<!-- Manager -->
+
+            <div class="field">
+                <label class="label">Manager</label>
+                <div class="control">
+                    <input class="input" type="text" name="manager" placeholder="Enter Manager" id="manager">
+                </div>
+            </div>
+
+            <script>document.getElementById("manager").defaultValue = "{{ manager }}";</script>
+
+<!-- Grade -->
+
+            <div class="field">
+                <label class="label">Grade</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="grade">
+                                {% for rating in grade %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("grade").defaultValue = "{{ grade }}";</script>
+
+<!-- Potential Grade -->
+
+            <div class="field">
+                <label class="label">Potential Grade</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="potential_grade">
+                                {% for rating in potential_grade %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("grade").defaultValue = "{{ potential_grade }}";</script>
+<!-- Position -->
+
+            <div class="field">
+                <label class="label">Position</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="position">
+                                {% for position in positions %}
+                                    <option>{{ position.position }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("position").defaultValue = "{{ position }}";</script>
+
+<!-- Location -->
+
+            <div class="field">
+                <label class="label">Location</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="location">
+                                {% for location in locations %}
+                                    <option>{{ location.location }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <script>document.getElementById("location").defaultValue = "{{ location }}";</script>
+
+<!-- Dev Cell rating -->
+
+            <div class="field">
+                <label class="label">Dev Cell Rating</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="dev_cell_rating">
+                                {% for rating in dev_cell_rating_options %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("dev_cell_rating").defaultValue = "{{ dev_cell_rating }}";</script>
+
+<!-- Performance rating -->
+
+            <div class="field">
+                <label class="label">Performance Rating</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select name="performance_rating">
+                                {% for rating in performance_rating_options %}
+                                    <option>{{ rating.grade }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <script>document.getElementById("performance_rating").defaultValue = "{{ performance_rating }}";</script>
+
+
+            {% if error %}
+                <p class="has-text-danger pb-2">{{ error }}</p>
+            {% endif %}
+
+            <div class="field is-grouped is-grouped-centered mt-5">
+                <div class="control">
+                    <button type="submit" class="button is-link">
+                        Submit
+                    </button>
+                </div>
+                <div class="control">
+                    <button type="reset" class="button is-light">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/prepopulate.js' %}"></script>
+
+
+{% endblock %}

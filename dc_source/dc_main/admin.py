@@ -1,9 +1,9 @@
 from django.contrib import admin
-from django.contrib.admin import actions
-
-from .models import Profile, Relationship, Action, Review
+from .models import Profile, Relationship, Action, Review, dev_cell_rating, performance_rating, grade, potential_grade, location, position
 
 # Register your models here.
+
+
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ('name', 'position', 'role', 'dev_cell_rating', 'performance_rating', 'grade')
@@ -21,3 +21,9 @@ admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Relationship, RelationshipAdmin)
 admin.site.register(Action, ActionAdmin)
 admin.site.register(Review, ReviewAdmin)
+admin.site.register(dev_cell_rating)
+admin.site.register(performance_rating)
+admin.site.register(grade)
+admin.site.register(potential_grade)
+admin.site.register(location)
+admin.site.register(position)

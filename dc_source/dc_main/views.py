@@ -4,13 +4,13 @@ from django.http import HttpRequest
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from .models import Relationship
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from dc_main.models import Profile
-
+from .models import Action, Profile, performance_rating, dev_cell_rating, grade, potential_grade, position, location
 
 # Create your views here.
 def home_view(request:HttpRequest):
@@ -43,6 +43,7 @@ def login_view(request: HttpRequest):
 
 
 # Added a view for the signup page
+# Added a view for the signup page
 def signup_view(request: HttpRequest):
     # Checks to see if the form was submitted and to save the values inputted as variables.
     if request.method == "POST":
@@ -57,17 +58,6 @@ def signup_view(request: HttpRequest):
             pass
         else:
             return render(request, "dc_main/signup.html", {"error": "Missing fields"})
-        # Check if a password has been provided
-        # if not password:
-        #     return render(request, "dc_main/signup.html", {"error": "No password provided"})
-        #
-        # # check if an email has been provided
-        # if not email:
-        #     return render(request, "dc_main/signup.html", {"error": "No email provided"})
-        #
-        # # Check a username has been provided
-        # if not username:
-        #     return render(request, "dc_main/signup.html", {"error": "No username provided"})
 
         # Validating that password and confirm password match.
         if password != password2:
@@ -91,6 +81,36 @@ def signup_view(request: HttpRequest):
 
     # Defult line that was used to close the function before.
     return render(request, "dc_main/signup.html")
+
+
+def actions_view(request:HttpRequest):
+
+    # Pulls the user and status values from the GET dicitonary
+
+    status = request.GET.get("status", "all")
+    username = request.GET.get("user", "all")
+
+    # Selects all the user foreign keys in all action objects
+
+    actions = Action.objects.select_related("user")
+
+
+    # Filters action objects based on status and user, else it selects all
+
+    if status != "all":
+        actions = actions.filter(action_status=status)
+
+    if username != "all":
+        actions = actions.filter(user__username=username)
+    
+    context = {
+        "actions" : actions,
+        "users" : Profile.objects.all(),
+        "selected_status" : status,
+        "selected_user" : username
+    }
+
+    return render(request, "dc_main/actions_view.html", context)
 
 @login_required
 def user_profile_view(request:HttpRequest):
@@ -119,3 +139,64 @@ def account_deletion_view(request:HttpRequest):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def form_view(request: HttpRequest):
+
+    profile = request.user.profile
+
+    if request.method == "POST":
+        profile.name = request.POST.get("name")
+        profile.grade = request.POST.get("grade")
+        profile.position = request.POST.get("position")
+        profile.location = request.POST.get("location")
+        profile.dev_cell_rating = request.POST.get("dev_cell_rating")
+        profile.performance_rating = request.POST.get("performance_rating")
+        profile.grade = request.POST.get("grade")
+        profile.potential_grade = request.POST.get("potential_grade")
+
+        print(profile.grade)
+        print(profile.potential_grade)
+        print(profile.position)
+        print(profile.location)
+        print(profile.dev_cell_rating)
+        print(profile.performance_rating)
+
+        profile.save()
+
+        print("Saved!")
+        
+        return redirect("home")
+
+    manager_relationship = Relationship.objects.filter(
+        to_user=request.user,
+        relationship_type="manager"
+    ).select_related("from_user__profile").first()
+
+    manager_name = ""
+    if manager_relationship:
+        manager_name = manager_relationship.from_user.profile.name
+
+    performance_rating_options = performance_rating.objects.all()
+    dev_cell_rating_options = dev_cell_rating.objects.all()
+    potential_grade_options = potential_grade.objects.all()
+    grade_options = grade.objects.all()
+    location_options = location.objects.all()
+    position_options = position.objects.all()
+
+    context = {
+        "username": profile.user.username,
+        "name": profile.name,
+        "manager": manager_name,
+        "grade": profile.grade,
+        "dev_cell_rating": profile.dev_cell_rating,
+        "performance_rating": profile.performance_rating,
+        "dev_cell_rating_options" : dev_cell_rating_options,
+        "performance_rating_options" : performance_rating_options,
+        "potential_grade" : potential_grade_options,
+        "grade" : grade_options,
+        "locations" : location_options,
+        "positions" : position_options
+    }
+
+    return render(request, "dc_main/form.html", context)

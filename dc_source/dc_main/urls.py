@@ -11,5 +11,8 @@ urlpatterns = [
     path('user-details', views.user_details_view, name="user-details"),
     path('user-preferences', views.user_preferences_view, name="user-preferences"),
     path('logout', views.logout_view, name="logout"),
-    path('deletion', views.account_deletion_view, name="deletion")
+    path('deletion', views.account_deletion_view, name="deletion"),
+    path('actions', views.actions_view, name="actions"),
+    path('form', views.form_view, name="form")
+
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
 
@@ -75,6 +76,24 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review_date = models.DateField()
     review_information = models.TextField(blank=True)
+
+class dev_cell_rating(models.Model):
+    grade = models.CharField(max_length=32)
+
+class performance_rating(models.Model):
+    grade = models.CharField(max_length=32)
+
+class grade(models.Model):
+    grade = models.CharField(max_length=32)
+
+class potential_grade(models.Model):
+    grade = models.CharField(max_length=32)
+
+class location(models.Model):
+    location = models.CharField(max_length=32)
+
+class position(models.Model):
+    position = models.CharField(max_length=32)
 
     @classmethod
     def create_review(cls, user, review_date, review_information):
