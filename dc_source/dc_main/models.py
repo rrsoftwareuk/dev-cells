@@ -77,6 +77,15 @@ class Review(models.Model):
     review_date = models.DateField()
     review_information = models.TextField(blank=True)
 
+    @classmethod
+    def create_review(cls, user, review_date, review_information):
+        new_review = cls(user=user, date=review_date, information=review_information)
+        new_review.save()
+        return new_review
+
+    def __str__(self):
+        return f'Review on {self.user.first_name} {self.user.last_name}'
+
 class dev_cell_rating(models.Model):
     grade = models.CharField(max_length=32)
 
@@ -94,12 +103,3 @@ class location(models.Model):
 
 class position(models.Model):
     position = models.CharField(max_length=32)
-
-    @classmethod
-    def create_review(cls, user, review_date, review_information):
-        new_review = cls(user=user, date=review_date, information=review_information)
-        new_review.save()
-        return new_review
-
-    def __str__(self):
-        return f'Review on {self.user.first_name} {self.user.last_name}'
